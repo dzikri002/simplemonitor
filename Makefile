@@ -1,7 +1,7 @@
 .PHONY: flake8 dist twine twine-test
 
 ifeq ($(OS),Windows_NT)
-ENVPATH := $( shell python -c "import os.path; import sys; print(os.path.join(sys.exec_prefix, 'Scripts'))" )
+ENVPATH := $(shell python -c "import os.path; import sys; print(os.path.join(sys.exec_prefix, 'Scripts'))")
 MOCKSPATH := tests\mocks;
 else
 ENVPATH := $(shell pipenv --venv)
