@@ -12,6 +12,8 @@ flake8:
 	pipenv run flake8 --ignore=E501,W503,E203 *.py simplemonitor/
 
 integration-tests:
+	echo mocks path is $(MOCKSPATH)
+	echo env path is $(ENVPATH)
 	pipenv run env PATH="$(MOCKSPATH)$(PATH)" "$(ENVPATH)/bin/coverage" run monitor.py -1 -v -d -f tests/monitor.ini
 
 env-test:
