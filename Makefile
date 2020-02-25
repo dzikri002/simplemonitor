@@ -1,6 +1,10 @@
 .PHONY: flake8 dist twine twine-test
 
+ifeq ($(OS),Windows_NT)
+ENVPATH := $( shell python -c "import os.path; import sys; print(os.path.join(sys.exec_prefix, 'Scripts'))" )
+else
 ENVPATH := $(shell pipenv --venv)
+endif
 
 flake8:
 	pipenv run flake8 --ignore=E501,W503,E203 *.py simplemonitor/
