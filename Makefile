@@ -2,10 +2,10 @@
 
 ifeq ($(OS),Windows_NT)
 ENVPATH := $( shell python -c "import os.path; import sys; print(os.path.join(sys.exec_prefix, 'Scripts'))" )
-MOCKSPATH := "tests\\mocks;"
+MOCKSPATH := tests\mocks;
 else
 ENVPATH := $(shell pipenv --venv)
-MOCKSPATH := "$(PWD)/tests/mocks:"
+MOCKSPATH := $(PWD)/tests/mocks:
 endif
 
 flake8:
