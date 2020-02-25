@@ -1,10 +1,10 @@
 .PHONY: flake8 dist twine twine-test
 
 ifeq ($(OS),Windows_NT)
-ENVPATH := $(shell python -c "import os.path; import sys; print(os.path.join(sys.exec_prefix, 'Scripts'))")
+ENVPATH := $(shell python -c "import os.path; import sys; print(os.path.join(sys.exec_prefix, 'Scripts'))")\
 MOCKSPATH := tests\mocks;
 else
-ENVPATH := $(shell pipenv --venv)
+ENVPATH := $(shell pipenv --venv)/bin/
 MOCKSPATH := $(PWD)/tests/mocks:
 endif
 
@@ -14,13 +14,13 @@ flake8:
 integration-tests:
 	echo mocks path is $(MOCKSPATH)
 	echo env path is $(ENVPATH)
-	pipenv run env PATH="$(MOCKSPATH)$(PATH)" "$(ENVPATH)/bin/coverage" run monitor.py -1 -v -d -f tests/monitor.ini
+	pipenv run env PATH="$(MOCKSPATH)$(PATH)" "$(ENVPATH)coverage" run monitor.py -1 -v -d -f tests/monitor.ini
 
 env-test:
-	pipenv run env TEST_VALUE=myenv "$(ENVPATH)/bin/coverage" run --append monitor.py -t -f tests/monitor-env.ini
+	pipenv run env TEST_VALUE=myenv "$(ENVPATH)coverage" run --append monitor.py -t -f tests/monitor-env.ini
 
 unit-test:
-	pipenv run "$(ENVPATH)/bin/coverage" run --append -m unittest discover -s tests
+	pipenv run "$(ENVPATH)coverage" run --append -m unittest discover -s tests
 
 network-test:
 	pipenv run tests/test-network.sh
